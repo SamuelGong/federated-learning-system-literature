@@ -23,10 +23,14 @@ This repository serves as a complement of the survey below.
 If you feel this repository is helpful, please help to cite the survey above.
 
 ## Quick Links
-**Recent Optimization Approaches:** | [Optimizing the Selection Phase](#optimizing-the-selection-phase) |
+**Recent Optimization Approaches:**
+* [Optimizing the Selection Phase](#21-optimizing-the-selection-phase): At the beginning of each round, the server waits for a sufficient number of clients with
+eligible status (i.e., currently charging and connected to an unmetered network) to check in. The server then selects a subset of them based on certain strategies (e.g., randomly or selectively) for participation, and notifies the others to reconnect later.
+* [Optimizing the Configuration Phase](#22-optimizing-the-configuration-phase): The server next sends the global model status and configuration profiles (e.g., the number of local epochs or the reporting deadline) to each of the selected clients. Based on the instructed configuration, the clients perform local model training independently with their private data.
+* [Optimizing the Reporting Phase](#23-optimizing-the-reporting-phase): The server then waits for the participating clients to report local updates until reaching the predefined deadline. The current round is aborted if no enough clients report in time. Otherwise, the server aggregates the received local updates, uses the aggregate to update the global model status, and concludes the round.
 
-## Recent Optimization Approaches
-### Optimizing the Selection Phase
+## 2 Recent Optimization Approaches
+### 2.1 Optimizing the Selection Phase
 | Year   | Title |  Category | Venue  | Paper Link  |
 |-------|--------|--------|-----------|------------|
 | 2021 | **AutoFL: Enabling heterogeneity-aware energy efficient federated learning** | Co-design (Fine-grained) | ACM MICRO | [Link](https://dl.acm.org/doi/abs/10.1145/3466752.3480129) |
@@ -37,25 +41,37 @@ If you feel this repository is helpful, please help to cite the survey above.
 | 2019 | **Client selection for federated learning with heterogeneous resources in mobile edge** | Partial optimization (system-oriented) | IEEE ICC | [Link](https://ieeexplore.ieee.org/document/8761315) |
 
 
-### Optimizing the Configuration Phase
+### 2.2 Optimizing the Configuration Phase
+#### 2.2.1 Synchronization Frequency Reduction
 | Year   | Title |  Category | Venue  | Paper Link  |
 |-------|--------|--------|-----------|------------|
-| 2021 | **Communication-efficient federated learning with adaptive parameter freezing** | Synchronization frequency reduction (parameter-level) | IEEE ICDCS | [Link](https://ieeexplore.ieee.org/document/9546506) |
-| 2020 | **Communication-efficient federated deep learning with layerwise asynchronous model update and temporally weighted aggregation** | Synchronization frequency reduction (layer-level) | IEEE TNNLS | [Link](https://ieeexplore.ieee.org/document/8945292) |
-| 2020 | **FetchSGD: Communication-efficient federated learning with sketching** | Model update size reduction (sketch) | ICML | [Link](https://proceedings.mlr.press/v119/rothchild20a.html) |
-| 2019 | **CMFL: Mitigating communication overhead for federated learning** | Synchronization frequency reduction (client-level) | IEEE ICDCS | [Link](https://ieeexplore.ieee.org/document/8885054) |
-| 2019 | **Compressing Gradient Optimizers via Count-Sketches** |  Model update size reduction (sketch) | ICML | [Link](https://proceedings.mlr.press/v97/spring19a.html) |
-| 2019 | **Communication-efficient distributed SGD with sketching** | Model update size reduction (sketch) | NeurIPS | [Link](https://papers.nips.cc/paper_files/paper/2019/hash/75da5036f659fe64b53f3d9b39412967-Abstract.html) |
-| 2019 | **Error feedback fixes SignSGD and other gradient compression schemes** | Model update size reduction (quantization) | ICML | [Link](https://proceedings.mlr.press/v97/karimireddy19a.html) |
-| 2019 | **SignSGD with majority vote is communication efficient and fault tolerant** | Model update size reduction (quantization) | ICLR (Poster) | [Link](https://openreview.net/forum?id=BJxhijAcY7) |
-| 2019 | **A distributed synchronous SGD algorithm with global top-k sparsification for low bandwidth networks** | Model update size reduction (sparsification) | IEEE ICDCS | [Link](https://www.computer.org/csdl/proceedings-article/icdcs/2019/251900c238/1ezRT3vzfcA) |
-| 2018 | **Efficient decentralized deep learning by dynamic model averaging** | Synchronization frequency reduction (client-level) | ECML-PKDD | [Link](https://link.springer.com/chapter/10.1007/978-3-030-10925-7_24) |
-| 2018 | **Sparsified SGD with memory** | Model update size reduction (sparsification) | NeurIPS | [Link](https://proceedings.neurips.cc/paper_files/paper/2018/hash/b440509a0106086a67bc2ea9df0a1dab-Abstract.html) |
-| 2018 | **Deep gradient compression: Reducing the communication bandwidth for distributed training** | Model update size reduction (sparsification) | ICLR (Poster) | [Link](https://openreview.net/forum?id=SkhQHMW0W) |
-| 2018 | **Gradient sparsification for communication-efficient distributed optimization** | Model update size reduction (sparsification) | NeurIPS | [Link](https://proceedings.neurips.cc/paper/2018/hash/3328bdf9a4b9504b9398284244fe97c2-Abstract.html) |
-| 2018 | **SketchML: Accelerating distributed machine learning with data sketches** | Model update size reduction (sketch) | ACM SIGMOD | [Link](https://dl.acm.org/doi/10.1145/3183713.3196894) |
-| 2018 | **Error compensated quantized SGD and its applications to large-scale distributed optimization** | Model update size reduction (quantization) | ICML | [Link](https://arxiv.org/abs/1806.08054) |
-| 2017 | **Gaia: Geo-distributed machine learning approaching LAN speeds** | Synchronization frequency reduction (client-level) | USENIX NSDI | [Link](https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/hsieh) |
-| 2017 | **Sparse communication for distributed gradient descent** | Model update size reduction (quantization) | ACL EMNLP | [Link](https://aclanthology.org/D17-1045/) |
-| 2017 | **TernGrad: Ternary gradients to reduce communication in distributed deep learning** | Model update size reduction (quantization) | NeurIPS | [Link](https://papers.nips.cc/paper_files/paper/2017/hash/89fcd07f20b6785b92134bd6c1d0fa42-Abstract.html) |
-| 2017 | **QSGD: Communication-efficient SGD via gradient quantization and encoding** | Model update size reduction (quantization) | NeurIPS | [Link](https://proceedings.neurips.cc/paper/2017/hash/6c340f25839e6acdc73414517203f5f0-Abstract.html) |
+| 2021 | **Communication-efficient federated learning with adaptive parameter freezing** | Parameter-level | IEEE ICDCS | [Link](https://ieeexplore.ieee.org/document/9546506) |
+| 2020 | **Communication-efficient federated deep learning with layerwise asynchronous model update and temporally weighted aggregation** | Layer-level | IEEE TNNLS | [Link](https://ieeexplore.ieee.org/document/8945292) |
+| 2019 | **CMFL: Mitigating communication overhead for federated learning** | Client-level | IEEE ICDCS | [Link](https://ieeexplore.ieee.org/document/8885054) |
+| 2018 | **Efficient decentralized deep learning by dynamic model averaging** | Client-level | ECML-PKDD | [Link](https://link.springer.com/chapter/10.1007/978-3-030-10925-7_24) |
+
+#### 2.2.2 Model Update Size Reduction
+| Year   | Title |  Category | Venue  | Paper Link  |
+|-------|--------|--------|-----------|------------|
+| 2020 | **FetchSGD: Communication-efficient federated learning with sketching** | Sketch | ICML | [Link](https://proceedings.mlr.press/v119/rothchild20a.html) |
+| 2019 | **Compressing Gradient Optimizers via Count-Sketches** | Sketch | ICML | [Link](https://proceedings.mlr.press/v97/spring19a.html) |
+| 2019 | **Communication-efficient distributed SGD with sketching** | Sketch | NeurIPS | [Link](https://papers.nips.cc/paper_files/paper/2019/hash/75da5036f659fe64b53f3d9b39412967-Abstract.html) |
+| 2019 | **Error feedback fixes SignSGD and other gradient compression schemes** | Quantization | ICML | [Link](https://proceedings.mlr.press/v97/karimireddy19a.html) |
+| 2019 | **SignSGD with majority vote is communication efficient and fault tolerant** | Quantization | ICLR (Poster) | [Link](https://openreview.net/forum?id=BJxhijAcY7) |
+| 2019 | **A distributed synchronous SGD algorithm with global top-k sparsification for low bandwidth networks** | Sparsification | IEEE ICDCS | [Link](https://www.computer.org/csdl/proceedings-article/icdcs/2019/251900c238/1ezRT3vzfcA) |
+| 2018 | **Sparsified SGD with memory** | Sparsification | NeurIPS | [Link](https://proceedings.neurips.cc/paper_files/paper/2018/hash/b440509a0106086a67bc2ea9df0a1dab-Abstract.html) |
+| 2018 | **Deep gradient compression: Reducing the communication bandwidth for distributed training** | Sparsification | ICLR (Poster) | [Link](https://openreview.net/forum?id=SkhQHMW0W) |
+| 2018 | **Gradient sparsification for communication-efficient distributed optimization** | Sparsification | NeurIPS | [Link](https://proceedings.neurips.cc/paper/2018/hash/3328bdf9a4b9504b9398284244fe97c2-Abstract.html) |
+| 2018 | **SketchML: Accelerating distributed machine learning with data sketches** | Sketch | ACM SIGMOD | [Link](https://dl.acm.org/doi/10.1145/3183713.3196894) |
+| 2018 | **Error compensated quantized SGD and its applications to large-scale distributed optimization** | Quantization | ICML | [Link](https://arxiv.org/abs/1806.08054) |
+| 2017 | **Gaia: Geo-distributed machine learning approaching LAN speeds** | Client-level | USENIX NSDI | [Link](https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/hsieh) |
+| 2017 | **Sparse communication for distributed gradient descent** | Quantization | ACL EMNLP | [Link](https://aclanthology.org/D17-1045/) |
+| 2017 | **TernGrad: Ternary gradients to reduce communication in distributed deep learning** | Quantization | NeurIPS | [Link](https://papers.nips.cc/paper_files/paper/2017/hash/89fcd07f20b6785b92134bd6c1d0fa42-Abstract.html) |
+| 2017 | **QSGD: Communication-efficient SGD via gradient quantization and encoding** | Quantization | NeurIPS | [Link](https://proceedings.neurips.cc/paper/2017/hash/6c340f25839e6acdc73414517203f5f0-Abstract.html) |
+
+#### 2.2.3 Training Latency Reduction
+| Year   | Title |  Category | Venue  | Paper Link  |
+|-------|--------|--------|-----------|------------|
+| 2020 | **Resource allocation in mobility-aware federated learning networks: A deep reinforcement learning approach** | Load balancing | IEEE WF-IoT | [Link](https://ieeexplore.ieee.org/document/9221089) | 
+| 2019 | **Efficient training management for mobile crowd-machine learning: A deep reinforcement learning approach** | Load balancing | IEEE WCL | [Link](https://ieeexplore.ieee.org/document/8716527) |
+
