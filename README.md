@@ -72,7 +72,7 @@ eligible status (i.e., currently charging and connected to an unmetered network)
 | 2018 | **SketchML: Accelerating distributed machine learning with data sketches** | Sketch | ACM SIGMOD | [Link](https://dl.acm.org/doi/10.1145/3183713.3196894) |
 | 2018 | **Error compensated quantized SGD and its applications to large-scale distributed optimization** | Quantization | ICML | [Link](https://arxiv.org/abs/1806.08054) |
 | 2017 | **Gaia: Geo-distributed machine learning approaching LAN speeds** | Client-level | USENIX NSDI | [Link](https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/hsieh) |
-| 2017 | **Sparse communication for distributed gradient descent** | Quantization | ACL EMNLP | [Link](https://aclanthology.org/D17-1045/) |
+| 2017 | **Sparse communication for distributed gradient descent** | Sparsification | ACL EMNLP | [Link](https://aclanthology.org/D17-1045/) |
 | 2017 | **TernGrad: Ternary gradients to reduce communication in distributed deep learning** | Quantization | NeurIPS | [Link](https://papers.nips.cc/paper_files/paper/2017/hash/89fcd07f20b6785b92134bd6c1d0fa42-Abstract.html) |
 | 2017 | **QSGD: Communication-efficient SGD via gradient quantization and encoding** | Quantization | NeurIPS | [Link](https://proceedings.neurips.cc/paper/2017/hash/6c340f25839e6acdc73414517203f5f0-Abstract.html) |
 
